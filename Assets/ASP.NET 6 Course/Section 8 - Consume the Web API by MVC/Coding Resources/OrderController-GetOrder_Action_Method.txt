@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebAPIConsume.Models;
+
+namespace WebAPIConsume.Controllers
+{
+    public class OrderController : Controller
+    {
+       
+        [HttpGet]
+        public ViewResult GetOrder()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetOrder(int id)
+        {
+            Order order = new Order();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:44395/api/Order/" + id))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    order = JsonConvert.DeserializeObject<Order>(apiResponse);
+                }
+            }
+            return View(order);
+        }
+        
+    }
+}

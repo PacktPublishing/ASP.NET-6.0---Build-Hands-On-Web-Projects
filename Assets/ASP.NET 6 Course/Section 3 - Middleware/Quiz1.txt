@@ -1,0 +1,13 @@
+Quiz 1 (ASP.NET 6.0 - Build Hands-On Web Projects)
+
+Question: Middleware are classes that 
+
+Answer 
+Can handle an HTTP request or response (Correct) Best answer as it is the main function of a middleware component.
+
+Can choose whether to pass on the incoming HTTP request to another middleware in the pipeline. (Correct answer too, but not the best.) 
+
+Can't modify the incoming HTTP request at all. (Incorrect. It may modify the HTTP request if needed )
+
+Always modifies the outgoing HTTP response. (Incorrect. Again this may happen but not necessarily)
+       

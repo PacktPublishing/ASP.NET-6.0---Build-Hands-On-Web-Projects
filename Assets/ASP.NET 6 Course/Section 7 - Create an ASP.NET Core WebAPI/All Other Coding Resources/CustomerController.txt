@@ -1,0 +1,47 @@
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using WebAPI.Models;
+
+namespace WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CustomerController : ControllerBase
+    {
+        private ICustomerRepository customerRepository;
+        public CustomerController(ICustomerRepository repo)
+        {
+            customerRepository = repo;
+        }
+        [HttpGet]
+        public IEnumerable<Customer> GetCustomers()
+        {
+            return customerRepository.GetAllCustomers().ToList();
+        }
+        [HttpGet("{id}")]
+        public Customer GetCustomerById(int id)
+        {
+            return customerRepository.GetCustomerById(id);
+        }
+
+        [HttpPost]
+        public Customer Create([FromBody] Customer customer)
+        {
+            return customerRepository.AddCustomer(customer);
+        }
+
+        [HttpPut]
+        public Customer Update([FromForm] Customer customer)
+        {
+            return customerRepository.UpdateCustomer(customer);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            customerRepository.DeleteCustomer(id);
+        }
+       
+    }
+}

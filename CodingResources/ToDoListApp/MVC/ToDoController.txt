@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ASPNETCoreWebApplication.Model;
+using ASPNETCoreWebApplication.Services;
+using ASPNETCoreWebApplication.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ASPNETCoreWebApplication.Controllers
+{
+    public class ToDoController : Controller
+    {
+        private readonly ToDoService _service;
+        public ToDoController(ToDoService service)
+        {
+            _service = service;
+        }
+      
+      
+        public ActionResult Category([FromRoute]string category)
+        {
+           
+            CategoryViewModel viewModel = new CategoryViewModel();
+        
+            viewModel.ListModels = _service.GetItemsForCategory(category);
+            return View(viewModel);
+        }
+    }
+
+   
+}

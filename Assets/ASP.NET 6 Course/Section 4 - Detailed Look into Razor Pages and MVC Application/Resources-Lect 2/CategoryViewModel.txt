@@ -1,0 +1,13 @@
+using ASPNETCoreWebApplication.Model;
+using System.Collections.Generic;
+
+namespace ASPNETCoreWebApplication.ViewModels
+{
+    public class CategoryViewModel
+    {
+        // private readonly List<ToDoListModel> _items;
+        public IEnumerable<ToDoListModel> ListModels { get; set; }
+        public string currentCategory { get; set; }
+       
+    }
+}

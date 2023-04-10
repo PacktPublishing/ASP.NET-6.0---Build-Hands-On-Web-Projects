@@ -1,0 +1,39 @@
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using WebAPIConsume.Models;
+
+namespace WebAPIConsume.Controllers
+{
+    public class CustomerController : Controller
+    {
+       
+        [HttpGet]
+        public ViewResult AddCustomer()
+        {
+           return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddCustomer(Customer customer)
+        {
+            if(ModelState.IsValid)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(customer), Encoding.UTF8, "application/json");
+                    using (var response = await httpClient.PostAsync("https://localhost:44395/api/Customer/", content ))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        customer = JsonConvert.DeserializeObject<Customer>(apiResponse);
+                    }
+                }
+                return View(customer);
+            }
+            return View();
+        }
+
+    }
+}

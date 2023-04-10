@@ -1,0 +1,7 @@
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h1>Index</h1>
+    <h2>Make sure your API Project is running and  then <a href="/Customer" target="_blank"> Click Here</a></h2>
+
